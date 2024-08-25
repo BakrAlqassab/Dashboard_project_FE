@@ -15,8 +15,8 @@ import { useAuth } from '~/composables/useAuth';
 
 export default defineComponent({
   setup() {
-    const email = ref('');
-    const password = ref('');
+    const email = ref('alqassab31@gmail.com');
+    const password = ref('password');
     const error = ref<string | null>(null);
       const instance = getCurrentInstance();
       const router = instance?.proxy.$router;

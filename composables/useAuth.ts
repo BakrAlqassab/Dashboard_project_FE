@@ -15,17 +15,26 @@ export function useAuth(routger: any) {
       }
   const login = async (email: string, password: string) => {
     try {
-        console.log("useAuth")
-        console.log(email)
-        console.log(password)
+    
        await store.dispatch('login', { email, password });
        console.log("password")
     } catch (error) {
       console.error('Login failed:', error);
     }
+  }; 
+  
+  const register = async (username:string,email: string, password: string) => {
+    try {
+    
+       await store.dispatch('register', { username, email, password });
+      
+    } catch (error) {
+      console.error('register failed:', error);
+    }
   };
 
   return {
     login,
+    register
   };
 }
