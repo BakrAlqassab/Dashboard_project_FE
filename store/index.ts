@@ -1,7 +1,60 @@
-import { Store } from 'vuex';
-import { initialiseStores } from '~/utils/store-accessor';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
 
-const initializer = (store: Store<any>) => initialiseStores(store);
+Vue.use(Vuex);
 
-export const plugins = [initializer];
-export * from '~/utils/store-accessor';
+const store = () => {
+  return new Vuex.Store({
+    state: {
+      token: null as string | null,
+      user: null as object | null,
+    },
+    mutations: {
+      SET_TOKEN(state, token: string) {
+        state.token = token;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      },
+      SET_USER(state, user: object) {
+        state.user = user;
+      },
+      LOGOUT(state) {
+        state.token = null;
+        state.user = null;
+        delete axios.defaults.headers.common['Authorization'];
+      },
+    },
+    actions: {
+      async login({ commit }, credentials: { email: string; password: string }) {
+        try {
+            console.log("pass to the login")
+            console.log(credentials)
+    
+          const response = await axios.post('/api/users/login', credentials);
+          console.log(response)
+          const token = response.data.token;
+          const user = response.data.user;
+          commit('SET_TOKEN', token);
+          commit('SET_USER', user);
+          return user;
+        } catch (error) {
+            console.log("not pass to the login")
+          throw new Error('Login failed');
+        }
+      },
+      logout({ commit }) {
+        commit('LOGOUT');
+      },
+    },
+    getters: {
+      isAuthenticated(state): boolean {
+        return !!state.token;
+      },
+      getUser(state): object | null {
+        return state.user;
+      },
+    },
+  });
+};
+
+export default store;
