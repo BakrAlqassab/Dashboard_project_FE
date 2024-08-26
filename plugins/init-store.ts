@@ -1,7 +1,11 @@
+
 import { Plugin } from '@nuxt/types';
 
-const myPlugin: Plugin = (context) => {
-  console.log('Store initialized:', context.store);
+const initAuth: Plugin = ({ store }) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    store.commit('auth/SET_TOKEN', token);
+  }
 };
 
-export default myPlugin;
+export default initAuth;

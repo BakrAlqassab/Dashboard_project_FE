@@ -15,6 +15,8 @@ import { defineComponent, ref, getCurrentInstance } from 'vue';
 import { useAuth } from '~/composables/useAuth';
 
 export default defineComponent({
+  // middleware: 'auth',
+
   setup() {
     const username = ref('Beko 2024');
     const email = ref('alqassab24@gmail.com');

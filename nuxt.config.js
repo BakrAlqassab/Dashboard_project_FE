@@ -1,11 +1,14 @@
   export default {
     ssr: false,
     head: {
-      title: 'Your Project Title',
+      title: 'dashboard_project',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
+    },
+    router: {
+      middleware: 'auth',
     },
     css: ['vuetify/dist/vuetify.min.css'],
     plugins: ['~/plugins/axios.ts', '~/plugins/init-store.ts'],

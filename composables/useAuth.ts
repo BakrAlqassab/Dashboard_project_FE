@@ -16,8 +16,8 @@ export function useAuth(routger: any) {
   const login = async (email: string, password: string) => {
     try {
     
-       await store.dispatch('login', { email, password });
-       console.log("password")
+       await store.dispatch('auth/login', { email, password });
+        router.push('/dashboard'); // Redirect to the dashboard after login
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -26,7 +26,15 @@ export function useAuth(routger: any) {
   const register = async (username:string,email: string, password: string) => {
     try {
     
-       await store.dispatch('register', { username, email, password });
+    
+       const user = await store.dispatch('auth/register', { username, email, password });
+
+       if (user) {  // Check if user was successfully returned
+        router.push('/dashboard'); // Redirect to the dashboard after successful registration
+      } else {
+        console.error('Registration failed: No user returned.');
+      }
+    
       
     } catch (error) {
       console.error('register failed:', error);
