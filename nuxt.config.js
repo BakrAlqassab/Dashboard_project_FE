@@ -11,7 +11,7 @@
       middleware: 'auth',
     },
     css: ['vuetify/dist/vuetify.min.css'],
-    plugins: ['~/plugins/axios.ts', '~/plugins/init-store.ts'],
+    plugins: ['~/plugins/vuetify','~/plugins/axios.ts', '~/plugins/init-store.ts'], 
     buildModules: [
       '@nuxt/typescript-build',
       '@nuxtjs/vuetify',

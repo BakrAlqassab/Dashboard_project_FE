@@ -1,8 +1,8 @@
 <template>
   <v-container class="loading-container" fill-height>
-    <v-layout align-center justify-center>
-      <v-flex>
-        <v-progress-circular indeterminate color="primary" size="64"></v-progress-circular>
+    <v-layout  > 
+      <v-flex  class="ma-4 pa-4 text-center d-flex justify-center align-center">
+        <v-progress-circular indeterminate color="primary"  size="64"></v-progress-circular>
         <h2>Loading...</h2>
       </v-flex>
     </v-layout>

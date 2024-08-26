@@ -1,10 +1,27 @@
 <template>
   <v-container>
     <v-form @submit.prevent="handleLogin">
-      <v-text-field label="Email" v-model="email" type="email" required></v-text-field>
-      <v-text-field label="Password" v-model="password" type="password" required></v-text-field>
+      <v-text-field
+        label="Email"
+        v-model="email"
+        type="email"
+        required
+      ></v-text-field>
+      
+      <v-text-field
+        label="Password"
+        v-model="password"
+        type="password"
+        required
+      ></v-text-field>
+
       <v-btn type="submit" color="primary">Login</v-btn>
-      <v-alert v-if="error" type="error" dismissible>{{ error }}</v-alert>
+
+      <v-alert v-if="error" type="error" dismissible>
+        {{ error }}
+      </v-alert>
+
+      <v-btn text @click="goToRegister">Go to Register</v-btn>
     </v-form>
   </v-container>
 </template>
@@ -22,9 +39,9 @@ export default defineComponent({
       const instance = getCurrentInstance();
       const router = instance?.proxy.$router;
 
-if (!router) {
-  throw new Error('Router instance is not available');
-}
+      if (!router) {
+        throw new Error('Router instance is not available');
+      }
     const { login } = useAuth(router);  // Assuming useAuth is set up to handle login
 
     const handleLogin = async () => {
@@ -35,11 +52,17 @@ if (!router) {
       }
     };
 
+    const goToRegister = () => {
+      router.push('/register');
+    };
+
+
     return {
       email,
       password,
       error,
       handleLogin,
+      goToRegister,
     };
   },
 });

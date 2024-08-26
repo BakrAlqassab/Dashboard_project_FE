@@ -1,11 +1,33 @@
 <template>
   <v-container>
     <v-form @submit.prevent="handleRegister">
-      <v-text-field label="User Name" v-model="username" required></v-text-field>
-      <v-text-field label="Email" v-model="email" type="email" required></v-text-field>
-      <v-text-field label="Password" v-model="password" type="password" required></v-text-field>
+      <v-text-field
+        label="Username"
+        v-model="username"
+        required
+      ></v-text-field>
+      
+      <v-text-field
+        label="Email"
+        v-model="email"
+        type="email"
+        required
+      ></v-text-field>
+      
+      <v-text-field
+        label="Password"
+        v-model="password"
+        type="password"
+        required
+      ></v-text-field>
+
       <v-btn type="submit" color="primary">Register</v-btn>
-      <v-alert v-if="error" type="error" dismissible>{{ error }}</v-alert>
+
+      <v-alert v-if="error" type="error" dismissible>
+        {{ error }}
+      </v-alert>
+
+      <v-btn text @click="goToLogin">Go to Login</v-btn>
     </v-form>
   </v-container>
 </template>
