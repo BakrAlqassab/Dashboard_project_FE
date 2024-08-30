@@ -42,7 +42,7 @@ export default defineComponent({
       if (!router) {
         throw new Error('Router instance is not available');
       }
-    const { login } = useAuth(router);  // Assuming useAuth is set up to handle login
+    const { login } = useAuth(router); 
 
     const handleLogin = async () => {
       try {

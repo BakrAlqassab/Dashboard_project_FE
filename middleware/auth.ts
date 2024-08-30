@@ -14,7 +14,6 @@ const authMiddleware: Middleware =async  ({ store, redirect, route }) => {
 
   // If authenticated, prevent access to login/register pages
   if (isAuthenticated && (route.name === 'login' || route.name === 'register')) {
-    console.log("authe middleware")
     return redirect('/dashboard');
   }
 };

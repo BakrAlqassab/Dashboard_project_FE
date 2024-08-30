@@ -14,6 +14,7 @@ export function useAuth(router: any) {  // Correct the typo here
     const login = async (email: string, password: string) => {
         try {
             await store.dispatch('auth/login', { email, password });
+          
             router.push('/dashboard'); // Redirect after login
         } catch (error) {
             console.error('Login failed:', error);

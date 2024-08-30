@@ -1,8 +1,8 @@
 import { Module } from 'vuex';
 import { state, AuthState } from './state';
-import { mutations } from '../mutations/authMutations'; // Adjust path as necessary
-import { actions } from '../actions/authActions'; // Adjust path as necessary
-import { getters } from '../getters/authGetters'; // Adjust path as necessary
+import { mutations } from '../mutations/authMutations';
+import { actions } from '../actions/authActions'; 
+import { getters } from '../getters/authGetters';
 import { RootState } from './state';
 
 const auth: Module<AuthState, RootState> = {

@@ -1,30 +1,23 @@
-import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
+import axios from 'axios';
+import { ActionTree, ActionContext } from 'vuex';
+import { ChartsState, Chart,Mutations} from './types';
+import { Module } from 'vuex';
+import { mutations } from '../mutations/chartMutations';
+import { actions } from '../actions/chartActions'; 
+import { getters } from '../getters/chartGetters';
+import { RootState } from './state';
 
-interface Chart {
-  id: number;
-  type: string;
-  color: string;
-  date: string;
-  sensor: string;
-}
+const state: ChartsState = {
+  charts: [],
+};
 
-@Module({ namespaced: true, stateFactory: true })
-export default class Charts extends VuexModule {
-  private charts: Chart[] = [];
 
-  @Mutation
-  ADD_CHART(chart: Chart) {
-    this.charts.push(chart);
-  }
+const charts: Module<ChartsState, RootState> = {
+  namespaced: true,
+  state,
+  mutations,
+  actions,
+  getters,
+};
 
-  @Action
-  addChart(chart: Chart) {
-    this.context.commit('ADD_CHART', { ...chart, id: this.charts.length + 1 });
-  }
-
-  get getAllCharts() {
-    console.log("getAllCharts")
-    console.log(this.charts)
-    return this.charts;
-  }
-}
+export default charts;

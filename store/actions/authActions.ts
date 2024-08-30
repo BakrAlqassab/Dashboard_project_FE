@@ -10,6 +10,7 @@ export const actions = {
         try {
           const response = await $axios.get('/users/me');
           const user = response.data;
+        
 
           commit('SET_USER', user);
         } catch (error) {
@@ -33,8 +34,10 @@ export const actions = {
       const response = await $axios.post('/users/login', credentials);
       const token = response.data.token;
       const user = response.data.user;
+
       commit(MutationTypes.SET_TOKEN, token);
       commit(MutationTypes.SET_USER, user);
+      
       localStorage.setItem('authToken', token);
       return user;
     } catch (error) {

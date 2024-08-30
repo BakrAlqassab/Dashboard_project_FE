@@ -1,4 +1,4 @@
-import {AuthState} from '../modules/state';
+import { AuthState } from "../modules/state";
 
 export const getters = {
   isAuthenticated(state: AuthState): boolean {

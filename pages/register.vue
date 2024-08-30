@@ -1,19 +1,15 @@
 <template>
   <v-container>
     <v-form @submit.prevent="handleRegister">
-      <v-text-field
-        label="Username"
-        v-model="username"
-        required
-      ></v-text-field>
-      
+      <v-text-field label="Username" v-model="username" required></v-text-field>
+
       <v-text-field
         label="Email"
         v-model="email"
         type="email"
         required
       ></v-text-field>
-      
+
       <v-text-field
         label="Password"
         v-model="password"
@@ -33,26 +29,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, getCurrentInstance } from 'vue';
-import { useAuth } from '~/composables/useAuth';
+import { defineComponent, ref, getCurrentInstance } from "vue";
+import { useAuth } from "~/composables/useAuth";
 
 export default defineComponent({
-  // middleware: 'auth',
-
   setup() {
-    const username = ref('Beko 2024');
-    const email = ref('alqassab24@gmail.com');
-    const password = ref('password');
+    const username = ref("Beko 2024");
+    const email = ref("alqassab24@gmail.com");
+    const password = ref("password");
     const error = ref<string | null>(null);
-      const instance = getCurrentInstance();
-      const router = instance?.proxy.$router;
+    const instance = getCurrentInstance();
+    const router = instance?.proxy.$router;
     const { register } = useAuth(router);
 
     const handleRegister = async () => {
       try {
         await register(username.value, email.value, password.value);
       } catch (err) {
-        error.value = 'Registration failed';
+        error.value = "Registration failed";
       }
     };
 

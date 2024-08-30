@@ -1,16 +1,38 @@
-<template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
-    </v-col>
-  </v-row>
+<!-- <template>
+  <v-app>
+    <v-main>
+      <v-container>
+        <v-chart :options="chartOptions"></v-chart>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
-<script>
-export default {
-  name: 'IndexPage'
-}
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  data() {
+    return {
+      chartOptions: {
+        title: {
+          text: 'Sample Chart'
+        },
+        tooltip: {},
+        xAxis: {
+          data: ['A', 'B', 'C', 'D', 'E', 'F']
+        },
+        yAxis: {},
+        series: [{
+          type: 'line',
+          data: [5, 20, 36, 10, 10, 20]
+        }]
+      };
+    };
+  }
+});
 </script>
+
+<style scoped>
+/* Add any custom styles here */
+</style> -->
