@@ -32,6 +32,8 @@ export function useChartHelpers(store: any) {
   const sensors = computed(() => store?.getters["sensors/getSensors"] || []);
   const selectedColor = ref("#000000");
   const chartOptionsCache: Ref<{ [key: string]: any }> = ref({});
+  const snackbar = ref(false);
+  const snackbarMessage = ref("");
   const deleteChart = async (chartId: string) => {
     try {
       if (confirm("Do you really want to delete?")) {
@@ -39,6 +41,9 @@ export function useChartHelpers(store: any) {
           userId: selectedUser.value._id,
           id: chartId,
         });
+
+       snackbarMessage.value = "Chart removed.";
+       snackbar.value = true;
       }
     } catch (error) {
       console.error("Failed to delete chart:", error);
@@ -107,11 +112,7 @@ export function useChartHelpers(store: any) {
     chartOptionsCache.value = {};
   };
 
-  onMounted(() => {
-    store?.dispatch("auth/fetchUsers").catch((error: any) => {
-      console.error("Failed to fetch users:", error);
-    });
-  });
+
 
   return {
     users,

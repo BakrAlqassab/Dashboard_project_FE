@@ -1,23 +1,28 @@
 <template>
   <v-container class="loading-container" fill-height>
-    <v-layout  > 
-      <v-flex  class="ma-4 pa-4 text-center d-flex justify-center align-center">
-        <v-progress-circular indeterminate color="primary"  size="64"></v-progress-circular>
+    <v-row class="d-flex justdify-center align-fcenter" justify="center">
+      <v-col class="text-center" cols="12" md="6">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+          size="64"
+        ></v-progress-circular>
         <h2>Loading...</h2>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
 export default {
-  name: 'Loading',
+  name: "Loading",
 };
 </script>
 
-<style scoped>
-.loading-container {
-  text-align: center;
-  height: 100vh;
-}
+<style>
+  .loading-container {
+    text-align: center;
+    height: 100vh;
+    width: 100%;
+  }
 </style>

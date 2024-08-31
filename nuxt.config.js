@@ -10,7 +10,7 @@ export default {
   router: {
     middleware: 'auth',
   },
-  css: ['vuetify/dist/vuetify.min.css'],
+  css: ['vuetify/dist/vuetify.min.css'], 
   plugins: ['~/plugins/apexcharts.ts', '~/plugins/vuetify.ts', '~/plugins/axios.ts', '~/plugins/init-store.ts'], 
   buildModules: [
     '@nuxt/typescript-build',
@@ -20,14 +20,14 @@ export default {
   axios: {
     baseURL: 'http://localhost:5000/api',
   },
-  build: {
+  build: {  
     babel: {
       presets({ isServer }) {
         return [
           [
-            require.resolve('@babel/preset-env'),
+            require.resolve('@nuxt/babel-preset-app'),
             {
-              targets: isServer ? { node: 'current' } : { browsers: ['last 2 versions'] },
+              targets: isServer ? { node: 'current' } : { browsers: ['last 2 versions'] }, 
               useBuiltIns: 'usage',
               corejs: 3,
             },
