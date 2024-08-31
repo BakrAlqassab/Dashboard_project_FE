@@ -1,6 +1,6 @@
 import { GetterTree } from 'vuex';
-import { ChartsState, Chart } from '../modules/types';
-import { RootState } from '../modules/state';
+import { Chart } from '../modules/types';
+import { RootState, ChartsState } from '../modules/state';
 
 export const getters: GetterTree<ChartsState, RootState> = {
   filteredCharts: (state) => (startDate: Date, endDate: Date) => {

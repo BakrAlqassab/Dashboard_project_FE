@@ -1,5 +1,6 @@
 
-import { Mutations as MutationTypes, ChartsState, Chart } from '../modules/types';
+import { Mutations as MutationTypes, Chart } from '../modules/types';
+import { ChartsState } from '../modules/state';
 
 export const mutations: MutationTypes = {
   SET_CHARTS(state: ChartsState, charts: Chart[]) {
@@ -8,4 +9,8 @@ export const mutations: MutationTypes = {
   ADD_CHART(state: ChartsState, chart: Chart) {
     state.charts.push(chart);
   },
+  REMOVE_CHART(state: ChartsState, id: Chart) {
+    state.charts = state.charts.filter((chart:any) => chart._id !== id);
+  },
+  
 };

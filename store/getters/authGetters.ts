@@ -10,4 +10,7 @@ export const getters = {
   getUser(state: AuthState): object | null {
     return state.user;
   },
+  getUsers(state: AuthState): object | null {
+    return state.users;
+  },
 };

@@ -1,10 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import auth from '~/store/modules/auth';
-// import charts from '~/store/modules/charts';
 import  charts from './modules/charts';
 import { sensors } from './modules/sensors';
-import {ChartsState} from "./modules/types"
+import {ChartsState} from "./modules/state"
 
 Vue.use(Vuex);
 

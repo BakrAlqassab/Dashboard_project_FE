@@ -1,6 +1,4 @@
-import { SensorState } from "~/store/modules/types";
-
-import { RootState } from "../modules/state";
+import { RootState,SensorState } from "../modules/state";
 import { GetterTree } from "vuex";
 
 export const getters: GetterTree<SensorState, RootState> = {

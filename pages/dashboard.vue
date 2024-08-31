@@ -11,7 +11,7 @@
         <v-color-picker
           v-model="selectedColor"
           label="Select Color"
-        ></v-color-picker>
+        />
       </v-col>
       <v-col cols="12" md="4">
         <v-select
@@ -19,14 +19,14 @@
           v-model="selectedSensors"
           label="Select Sensors"
           multiple
-        ></v-select>
+        />
       </v-col>
       <v-col cols="12" md="4">
         <v-select
           :items="chartTypes"
           v-model="selectedChartType"
           label="Select Chart Type"
-        ></v-select>
+        />
       </v-col>
     </v-row>
 
@@ -48,7 +48,7 @@
 
     <!-- Display Charts -->
     <v-row>
-      <v-col cols="12" v-for="(chart, index) in filteredCharts" :key="index">
+      <v-col cols="6" v-for="(chart, index) in filteredCharts" :key="index">
         <v-card>
           <v-col class="d-flex align-center justify-space-between">
             <v-card-title>{{ chart.type }} Chart</v-card-title>
@@ -68,7 +68,7 @@
 </template>
 
 <script lang="ts">
-import { ref, computed, onMounted, getCurrentInstance, watch, Ref } from "vue";
+import { ref, computed, onMounted, getCurrentInstance, Ref } from "vue";
 import VueApexCharts from "vue-apexcharts";
 
 export default {

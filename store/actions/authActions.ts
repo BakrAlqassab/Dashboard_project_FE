@@ -6,6 +6,33 @@ import { RootState } from '../modules/state';
 
 export const actions = {
     // to fetch the user when reload the page
+    async fetchUsers({ commit }: ActionContext<AuthState, RootState>) {
+      console.log("authActions page")
+      try {
+        const token = localStorage.getItem('authToken');
+        const response =  await $axios.get('/users/fetchUsers', {
+          headers: {
+            'Authorization': `Bearer ${token}}` // Assuming you store your JWT in the store
+          }
+        });
+     
+        // if (!response.ok) {
+        //   throw new Error('Failed to fetch users');
+        // }
+  
+
+        const users = await response.data;
+        console.log(users)
+        commit('SET_USERS', users);
+     
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+
+      
+
+    },
+    
     async fetchUser({ commit }: ActionContext<AuthState, RootState>) {
         try {
           const response = await $axios.get('/users/me');
@@ -20,14 +47,13 @@ export const actions = {
 
 
     async initializeAuth({ commit, dispatch }: ActionContext<AuthState, RootState>)  {
-        commit('SET_LOADING', true);
         const token = localStorage.getItem('authToken');
         if (token) {
           commit('SET_TOKEN', token);
           await dispatch('fetchUser');
         }
 
-        commit('SET_LOADING', false);
+
       },
   async login({ commit }: ActionContext<AuthState, any>, credentials: { email: string; password: string }) {
     try {
@@ -37,7 +63,7 @@ export const actions = {
 
       commit(MutationTypes.SET_TOKEN, token);
       commit(MutationTypes.SET_USER, user);
-      
+
       localStorage.setItem('authToken', token);
       return user;
     } catch (error) {

@@ -9,6 +9,9 @@ export const mutations = {
   SET_USER(state: AuthState, user: object) {
     state.user = user;
   },
+  SET_USERS(state: AuthState, users: object) {
+    state.users = users;
+  },
   SET_LOADING(state: AuthState, isLoading: boolean) {
     state.isLoading = isLoading;
   },

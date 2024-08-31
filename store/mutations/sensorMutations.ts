@@ -1,4 +1,4 @@
-import { SensorState } from '~/store/modules/types';
+import { SensorState } from '../modules/state';
 import { MutationTree } from 'vuex';
 export const mutations: MutationTree<SensorState> = {
     SET_SENSORS(state, sensors) {

@@ -3,7 +3,7 @@ import { mutations } from '../mutations/sensorMutations';
 import { actions } from '../actions/sensorActions'; 
 import { getters } from '../getters/sensorGetters';
 import { RootState } from './state';
-import { SensorState } from '../modules/types';
+import { SensorState } from '../modules/state';
 
 
 const state: SensorState = {
