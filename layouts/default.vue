@@ -10,7 +10,7 @@
         @click="navigateToDashboard"
       >
         <v-icon left class="logo-icon animate-logo">mdi-chart-line</v-icon>
-        <span class="animate-logo">Vue-charts</span>
+        <span class="animate-logo">charts</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
