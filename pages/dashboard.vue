@@ -7,48 +7,49 @@
 
     <!-- Chart Settings -->
     <v-card class="mb-12 pa-4" outlined>
-  <v-card-title>Chart Settings</v-card-title>
-  <v-card-text>
-    <v-row>
-      <v-col cols="12" sm="6" md="4">
-        <v-color-picker
-          v-model="selectedColor"
-          label="Select Color"
-          hide-inputs
-          class="mb-4"
-        />
-      </v-col>
-      <v-col cols="12" sm="6" md="4">
-        <v-select
-          :items="sensorOptions"
-          v-model="selectedSensors"
-          label="Select Sensors"
-          multiple
-          chips
-          class="mb-4"
-        />
-      </v-col>
-      <v-col cols="12" sm="12" md="4">
-        <v-select
-          :items="chartTypes"
-          v-model="selectedChartType"
-          label="Select Chart Type"
-          class="mb-4"
-        />
-      </v-col>
-      <v-col cols="12" class="text-center">
-        <v-btn color="primary" block @click="addChart">
-          Add Chart
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-card-text>
-</v-card>
+      <v-card-title>Chart Settings</v-card-title>
+      <v-card-text>
+        <v-row>
+          <v-col cols="12" sm="6" md="4">
+            <v-color-picker
+              v-model="selectedColor"
+              label="Select Color"
+              hide-inputs
+              class="mb-4"
+            />
+          </v-col>
+          <v-col cols="12" sm="6" md="4">
+            <v-select
+              :items="sensorOptions"
+              v-model="selectedSensors"
+              label="Select Sensors"
+              multiple
+              class="mb-4"
+              dense
+              outlined
+            />
+          </v-col>
+          <v-col cols="12" sm="12" md="4">
+            <v-select
+              :items="chartTypes"
+              v-model="selectedChartType"
+              label="Select Chart Type"
+              class="mb-4"
+              dense
+              outlined
+            />
+          </v-col>
+          <v-col cols="12" class="text-center">
+            <v-btn color="primary" block @click="addChart"> Add Chart </v-btn>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
 
-<v-divider class="my-4"></v-divider>
+    <!-- <v-divider class="my-4"></v-divider> -->
 
     <!-- Date Picker Range -->
-    <v-card outlined class="d-flex justify-center mb-12" >
+    <v-card outlined class="d-flex justify-center mb-12">
       <v-col cols="12" md="6">
         <v-card-title>Select Date Range</v-card-title>
         <v-card-text>
@@ -57,7 +58,7 @@
             range
             color="primary"
             header-color="primary"
-            class="styled-date-picker d-flex justdify-center"
+            class="styled-date-picker d-flex justify-center"
             @change="filteredCharts"
           />
         </v-card-text>
@@ -65,9 +66,16 @@
     </v-card>
 
     <v-divider class="my-4"></v-divider>
+
     <!-- Display Charts -->
-    <v-row class="justify-lg-start  justify-space-around">
-      <v-col cols="12" xl="3" md="5" v-for="chart in filteredCharts" :key="chart.id" >
+    <v-row v-if="filteredCharts.length" class="justify-lg-start justify-space-around">
+      <v-col
+        cols="12"
+        xl="3"
+        md="5"
+        v-for="chart in filteredCharts"
+        :key="chart.id"
+      >
         <v-card outlined>
           <v-card-subtitle>Color: {{ chart.color }}</v-card-subtitle>
           <v-card-subtitle>Date: {{ chart.createdAt }}</v-card-subtitle>
@@ -80,6 +88,11 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row v-else>
+      <v-col>
+        <noCharts />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -87,10 +100,12 @@
 import { ref, computed, onMounted, getCurrentInstance } from "vue";
 import VueApexCharts from "vue-apexcharts";
 import { useChartHelpers } from "../helpers/chartHelpers";
+import noCharts from "../components/noCharts.vue";
 
 export default {
   components: {
     apexchart: VueApexCharts,
+    noCharts,
   },
   setup() {
     const instance = getCurrentInstance();
@@ -145,9 +160,10 @@ export default {
 </script>
 
 <style>
+/* Ensure that the date picker is fully responsive */
 @media screen and (max-width: 768px) {
   ::v-deep .v-picker__body {
-    widows: 100%;
+    width: 100%;
   }
 }
 </style>

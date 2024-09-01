@@ -1,6 +1,6 @@
-import { GetterTree } from 'vuex';
-import { Chart } from '../modules/types';
-import { RootState, ChartsState } from '../modules/state';
+import { GetterTree } from "vuex";
+import { Chart } from "../modules/types";
+import { RootState, ChartsState } from "../modules/state";
 
 export const getters: GetterTree<ChartsState, RootState> = {
   filteredCharts: (state) => (startDate: Date, endDate: Date) => {
@@ -13,24 +13,20 @@ export const getters: GetterTree<ChartsState, RootState> = {
     return state.charts;
   },
   getChartsByDateRange: (state) => (startDate: Date, endDate: Date) => {
-  
-
-    if(!state.charts.length) {
-      return []
+    if (!state.charts.length) {
+      return [];
     }
-    // return state.charts
-    return state.charts.filter((chart: Chart) => {
 
+    return state.charts.filter((chart: Chart) => {
       if (!chart || !chart.createdAt) {
         console.log("Chart or createdAt is undefined");
         return false;
       }
-    
-      const date = chart.createdAt; 
+
+      const date = chart.createdAt;
       const chartDate = new Date(date);
 
-       return chartDate >= startDate && chartDate <= endDate;
-
+      return chartDate >= startDate && chartDate <= endDate;
     });
   },
 };

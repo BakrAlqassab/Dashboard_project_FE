@@ -48,8 +48,14 @@
           </v-col>
         </v-row>
   
-        <v-row class="justify-lg-start  justify-space-around my-4">
-            <v-col cols="12" xl="3" md="5" v-for="chart in filteredCharts" :key="chart.id" >
+        <v-row v-if="filteredCharts.length">
+          <v-col
+            cols="12"
+            md="6"
+            lg="4"
+            v-for="chart in filteredCharts"
+            :key="chart._id"
+          >
             <v-card outlined class="mb-4">
               <v-card-title>
                 {{ chart.type }} Chart
@@ -68,6 +74,11 @@
             </v-card>
           </v-col>
         </v-row>
+        <v-row v-else>
+            <v-col>
+                <noCharts/>
+            </v-col>
+        </v-row>
       </v-card>
     </v-container>
   </template>
@@ -76,10 +87,12 @@
   import VueApexCharts from "vue-apexcharts";
   import { useChartHelpers } from "../helpers/chartHelpers";
   import { getCurrentInstance, watch, onMounted } from "vue";
+  import noCharts from "../components/noCharts.vue"
   
   export default {
     components: {
       apexchart: VueApexCharts,
+      noCharts
     },
     setup() {
       const instance = getCurrentInstance();

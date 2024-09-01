@@ -1,10 +1,10 @@
 import { AuthState } from '../modules/state'; // Adjust path as necessary
-import { $axios } from '~/utils/api';
+import axios from 'axios';
 
 export const mutations = {
   SET_TOKEN(state: AuthState, token: string) {
     state.token = token;
-    $axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   },
   SET_USER(state: AuthState, user: object) {
     state.user = user;

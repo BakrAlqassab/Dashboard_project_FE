@@ -10,7 +10,6 @@ const state: SensorState = {
   sensors: [],
 };
 
-
 export const sensors = {
   namespaced: true,
   state,

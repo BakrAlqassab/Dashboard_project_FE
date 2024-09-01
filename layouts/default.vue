@@ -5,9 +5,12 @@
     <v-app-bar app color="primary" dark>
       <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
-      <v-toolbar-title class="text-subtitle-2 text-md-h6 cursor-pointer"    @click="navigateToDashboard">
+      <v-toolbar-title
+        class="text-subtitle-2 text-md-h6 cursor-pointer"
+        @click="navigateToDashboard"
+      >
         <v-icon left class="logo-icon animate-logo">mdi-chart-line</v-icon>
-        <span class="animate-logo ">Vue-charts</span>
+        <span class="animate-logo">Vue-charts</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
@@ -15,18 +18,23 @@
     <!-- Side Navigation Drawer -->
     <v-navigation-drawer v-model="drawer" app temporary>
       <v-list-item>
-      <v-list-item-content>
-        <v-icon @click="toggleDrawer" class="ml-auto d-flex justify-end" style="cursor: pointer;">mdi-close</v-icon>
-      </v-list-item-content>
-    </v-list-item>
-    <v-divider></v-divider>
+        <v-list-item-content>
+          <v-icon
+            @click="toggleDrawer"
+            class="ml-auto d-flex justify-end"
+            style="cursor: pointer"
+            >mdi-close</v-icon
+          >
+        </v-list-item-content>
+      </v-list-item>
+      <v-divider></v-divider>
       <v-list dense>
         <v-list-item
-         v-if="isAuthenticated"
+          v-if="isAuthenticated"
           link
           @click="navigateToDashboard"
           class="pointer"
-            :class="{ 'selected-page': isActivePage('dashboard') }"
+          :class="{ 'selected-page': isActivePage('dashboard') }"
         >
           <v-list-item-icon>
             <v-icon>mdi-view-dashboard</v-icon>
@@ -35,11 +43,11 @@
         </v-list-item>
 
         <v-list-item
-         v-if="isAuthenticated"
+          v-if="isAuthenticated"
           link
           @click="navigateToAdmin"
           class="pointer"
-           :class="{ 'selected-page': isActivePage('adminPage') }"
+          :class="{ 'selected-page': isActivePage('adminPage') }"
         >
           <v-list-item-icon>
             <v-icon>mdi-account-cog</v-icon>
@@ -54,17 +62,13 @@
           link
           @click="logout"
           class="pointer"
-         
         >
           <v-list-item-icon>
             <v-icon>mdi-logout</v-icon>
           </v-list-item-icon>
           <v-list-item-title>Logout</v-list-item-title>
-        </v-list-item>   
-        
-    
+        </v-list-item>
 
-        
         <v-list-item
           v-if="!isAuthenticated"
           link
@@ -75,12 +79,12 @@
             <v-icon>mdi-login</v-icon>
           </v-list-item-icon>
           <v-list-item-title>Login</v-list-item-title>
-        </v-list-item>   
-        
+        </v-list-item>
+
         <v-list-item
           v-if="!isAuthenticated"
           link
-            @click="goToRegister"
+          @click="goToRegister"
           class="pointer"
         >
           <v-list-item-icon>
@@ -109,32 +113,33 @@ import {
   getCurrentInstance,
 } from "vue";
 import Loading from "~/components/Loading.vue";
-import 'vuetify/dist/vuetify.min.css'
+import "vuetify/dist/vuetify.min.css";
 
 export default defineComponent({
   components: {
     Loading,
   },
   setup() {
-    const drawer = ref(false); // Controls the side drawer
+    const drawer = ref(false);
     const isLoading = ref(true);
 
     const instance = getCurrentInstance();
-    const store = instance?.proxy.$store; // Accessing Vuex store
-    const router = instance?.proxy.$router; // Accessing router
+    const store = instance?.proxy.$store; 
+    const router = instance?.proxy.$router;
 
     // Computed properties for authentication state and user data
-    const isAuthenticated = computed(() => store?.getters["auth/isAuthenticated"] || false);
+    const isAuthenticated = computed(
+      () => store?.getters["auth/isAuthenticated"] || false
+    );
     const getUser = computed(() => store?.getters["auth/getUser"]);
 
-    // Navigation methods
     const navigateToDashboard = () => {
       router?.push("/dashboard");
       drawer.value = false;
     };
 
-    const isActivePage = (page:string) => {
-      return router?.currentRoute.name  === page;
+    const isActivePage = (page: string) => {
+      return router?.currentRoute.name === page;
     };
 
     const navigateToAdmin = () => {
@@ -152,9 +157,8 @@ export default defineComponent({
       drawer.value = false;
     };
 
-
     const logout = () => {
-      store?.dispatch('auth/logout');
+      store?.dispatch("auth/logout");
       router?.push("/login");
       drawer.value = false;
     };
@@ -187,26 +191,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Vuetify provides many utility classes, but for cursor-pointer, we can define a reusable class */
-/* .pointer {
-  cursor: pointer;
-} */
-
 .selected-page {
-  background-color: rgba(0,0,0,.3) !important; /* Highlight the active page with the primary color */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.3
+  ) !important; /* Highlight the active page with the primary color */
   color: white !important;
 }
-/* Optional: Add hover effects for the logo and buttons */
-/* .v-toolbar-title.pointer:hover,
-.v-btn.pointer:hover,
-.v-list-item.pointer:hover {
-  text-decoration: underline;
-} */
-
-/* Additional styling for the user greeting */
-/* h1 {
-  font-size: 1rem;
-  color: #ffffff;
-  margin: 0;
-} */
 </style>

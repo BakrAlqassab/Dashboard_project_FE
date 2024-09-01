@@ -1,5 +1,12 @@
 import {ChartsState, RootState} from "./state"
 import { ActionContext } from 'vuex';
+
+export enum AuthTypes {
+  SET_TOKEN = 'SET_TOKEN',
+  SET_USER = 'SET_USER',
+  LOGOUT = 'LOGOUT',
+}
+
 export interface Chart {
   id: string;
   sensor: string;
@@ -8,7 +15,6 @@ export interface Chart {
   data: number[];
   date: string;
 }
-
 
 
 export type Mutations<S = ChartsState> = {

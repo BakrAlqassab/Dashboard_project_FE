@@ -1,4 +1,4 @@
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, Ref  } from 'vue';
 
 export function useChartHelpers(store: any) {
   const users = computed(() => store?.getters["auth/getUsers"] || []);
@@ -33,7 +33,7 @@ export function useChartHelpers(store: any) {
   const selectedColor = ref("#000000");
   const chartOptionsCache: Ref<{ [key: string]: any }> = ref({});
   const snackbar = ref(false);
-  const snackbarMessage = ref("");
+    const snackbarMessage = ref("");
   const deleteChart = async (chartId: string) => {
     try {
       if (confirm("Do you really want to delete?")) {
@@ -45,7 +45,7 @@ export function useChartHelpers(store: any) {
        snackbarMessage.value = "Chart removed.";
        snackbar.value = true;
       }
-    } catch (error) {
+    } catch (error:any) {
       console.error("Failed to delete chart:", error);
     }
   };
@@ -54,6 +54,11 @@ export function useChartHelpers(store: any) {
     if (!chart || !chart.sensors) {
       return { options: {}, series: [] };
     }
+    
+
+    if (chartOptionsCache.value[chart._id]) {
+        return chartOptionsCache.value[chart._id];
+      }
 
     const options = {
       chart: {
@@ -67,12 +72,17 @@ export function useChartHelpers(store: any) {
       colors: [chart.color],
     };
 
+
     const series = chart.sensors.map((sensor: any) => ({
       name: sensor.type,
       data: sensor.readings,
     }));
 
-    return { options, series };
+    const chartOptions = {options,series}
+
+    chartOptionsCache.value[chart._id] = chartOptions;
+
+    return chartOptions;
   };
 
 
@@ -104,7 +114,7 @@ export function useChartHelpers(store: any) {
       date: new Date().toISOString().split("T")[0],
     };
 
-    store?.dispatch("charts/addChart", newChart).catch((error) => {
+    store?.dispatch("charts/addChart", newChart).catch((error:any) => {
       console.error("Failed to add chart:", error);
     });
 

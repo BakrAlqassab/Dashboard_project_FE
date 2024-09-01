@@ -16,10 +16,13 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/vuetify',
   ],
-  modules: ['@nuxtjs/axios'],
-  axios: {
-    baseURL: 'http://localhost:5000/api',
+  env: {
+    BASE_URL: process.env.BASE_URL
   },
+  modules: ['@nuxtjs/axios'],
+  // axios: {
+  //   baseURL: 'http://localhost:5000/api',
+  // },
   build: {  
     babel: {
       presets({ isServer }) {
