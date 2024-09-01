@@ -66,6 +66,7 @@ import { RootState,ChartsState } from '../modules/state';
         }
       });
    
+
   
       commit('REMOVE_CHART', id); 
    

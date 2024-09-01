@@ -14,13 +14,16 @@ export interface Chart {
   color: string;
   data: number[];
   date: string;
+  createdAt: string;
 }
 
+type ChartId = Chart['id'];
 
 export type Mutations<S = ChartsState> = {
   SET_CHARTS(state: S, charts: Chart[]): void;
   ADD_CHART(state: S, chart: Chart): void;
-  REMOVE_CHART(state: S, id: Chart): void;
+  // REMOVE_CHART: (state: S, id: string) => void;
+  REMOVE_CHART: (state: S, id: ChartId) => void; 
 };
 
 import { CommitOptions, DispatchOptions, Store as VuexStore } from "vuex";

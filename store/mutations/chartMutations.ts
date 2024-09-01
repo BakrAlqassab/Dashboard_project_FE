@@ -9,8 +9,9 @@ export const mutations: MutationTypes = {
   ADD_CHART(state: ChartsState, chart: Chart) {
     state.charts.push(chart);
   },
-  REMOVE_CHART(state: ChartsState, id: Chart) {
-    state.charts = state.charts.filter((chart:any) => chart._id !== id);
-  },
+
+  REMOVE_CHART(state: ChartsState, id: string) {
+    state.charts = state.charts.filter((chart: Chart) => chart.id !== id);
+  }
   
 };
