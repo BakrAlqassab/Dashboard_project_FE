@@ -3,9 +3,8 @@
 
 
 **Dashboard_project_FE**
-## Build Setup
 
-is a Dashboard project with functionality of user management, chart creation, and data visualization.
+ Dashboard project with functionality of user management, chart creation, and data visualization.
 
 The project consists of two primary parts:
  the frontend application built with Vue.js, Nuxt, Vuetify, and Apexchart, and a backend service implemented using Node.js with Express and MongoDB. 
@@ -24,6 +23,9 @@ The project consists of two primary parts:
 ```javascript
 npm I
 npm run dev
+
+
+
 ```
 
 
