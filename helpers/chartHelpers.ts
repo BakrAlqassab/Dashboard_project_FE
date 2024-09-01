@@ -71,16 +71,14 @@ export function useChartHelpers(store: any) {
       colors: [chart.color],
       responsive: [
         {
-          breakpoint: 768, // Define the screen width breakpoint (480px for mobile)
+          breakpoint: 768, 
           options: {
-            chart: {
-              height: "100%", // You can also adjust the height if needed
-            },
+      
             title: {
               text: "",
             },
             legend: {
-              fontSize: "8px", // You can adjust the legend font size as well
+              fontSize: "8px",
             },
           },
         },
