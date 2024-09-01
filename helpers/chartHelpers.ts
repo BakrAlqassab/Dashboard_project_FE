@@ -1,4 +1,4 @@
-import { ref, computed, onMounted, Ref  } from 'vue';
+import { ref, computed, onMounted, Ref } from "vue";
 
 export function useChartHelpers(store: any) {
   const users = computed(() => store?.getters["auth/getUsers"] || []);
@@ -12,9 +12,7 @@ export function useChartHelpers(store: any) {
       .substr(0, 10),
   ]);
 
-  const userCharts = computed(
-    () => store?.getters["chart/getAllCharts"] || []
-  );
+  const userCharts = computed(() => store?.getters["chart/getAllCharts"] || []);
 
   const selectUser = async (user: any) => {
     selectedUser.value = user;
@@ -33,7 +31,7 @@ export function useChartHelpers(store: any) {
   const selectedColor = ref("#000000");
   const chartOptionsCache: Ref<{ [key: string]: any }> = ref({});
   const snackbar = ref(false);
-    const snackbarMessage = ref("");
+  const snackbarMessage = ref("");
   const deleteChart = async (chartId: string) => {
     try {
       if (confirm("Do you really want to delete?")) {
@@ -42,10 +40,10 @@ export function useChartHelpers(store: any) {
           id: chartId,
         });
 
-       snackbarMessage.value = "Chart removed.";
-       snackbar.value = true;
+        snackbarMessage.value = "Chart removed.";
+        snackbar.value = true;
       }
-    } catch (error:any) {
+    } catch (error: any) {
       console.error("Failed to delete chart:", error);
     }
   };
@@ -54,11 +52,10 @@ export function useChartHelpers(store: any) {
     if (!chart || !chart.sensors) {
       return { options: {}, series: [] };
     }
-    
 
     if (chartOptionsCache.value[chart._id]) {
-        return chartOptionsCache.value[chart._id];
-      }
+      return chartOptionsCache.value[chart._id];
+    }
 
     const options = {
       chart: {
@@ -68,24 +65,39 @@ export function useChartHelpers(store: any) {
         text: `Chart for ${chart.sensors
           .map((sensor: any) => sensor.type)
           .join(", ")}`,
+        align: "center",
+        style: {},
       },
       colors: [chart.color],
+      responsive: [
+        {
+          breakpoint: 768, // Define the screen width breakpoint (480px for mobile)
+          options: {
+            chart: {
+              height: "100%", // You can also adjust the height if needed
+            },
+            title: {
+              text: "",
+            },
+            legend: {
+              fontSize: "8px", // You can adjust the legend font size as well
+            },
+          },
+        },
+      ],
     };
-
 
     const series = chart.sensors.map((sensor: any) => ({
       name: sensor.type,
       data: sensor.readings,
     }));
 
-    const chartOptions = {options,series}
+    const chartOptions = { options, series };
 
     chartOptionsCache.value[chart._id] = chartOptions;
 
     return chartOptions;
   };
-
-
 
   const addChart = () => {
     // Check if a chart type is selected
@@ -114,15 +126,13 @@ export function useChartHelpers(store: any) {
       date: new Date().toISOString().split("T")[0],
     };
 
-    store?.dispatch("charts/addChart", newChart).catch((error:any) => {
+    store?.dispatch("charts/addChart", newChart).catch((error: any) => {
       console.error("Failed to add chart:", error);
     });
 
     // Clear the cache after adding a new chart
     chartOptionsCache.value = {};
   };
-
-
 
   return {
     users,
@@ -138,6 +148,6 @@ export function useChartHelpers(store: any) {
     selectedChartType,
     selectedSensors,
     sensors,
-    selectedColor
+    selectedColor,
   };
 }

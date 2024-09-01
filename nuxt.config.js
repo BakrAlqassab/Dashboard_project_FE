@@ -20,9 +20,6 @@ export default {
     BASE_URL: process.env.BASE_URL
   },
   modules: ['@nuxtjs/axios'],
-  // axios: {
-  //   baseURL: 'http://localhost:5000/api',
-  // },
   build: {  
     babel: {
       presets({ isServer }) {

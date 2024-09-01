@@ -39,8 +39,8 @@
               outlined
             />
           </v-col>
-          <v-col cols="12" class="text-center">
-            <v-btn color="primary" block @click="addChart"> Add Chart </v-btn>
+          <v-col cols="4" class="text-center ma-auto">
+            <v-btn color="primary" class="pa-4" block @click="addChart"> Add Chart </v-btn>
           </v-col>
         </v-row>
       </v-card-text>
@@ -50,7 +50,7 @@
 
     <!-- Date Picker Range -->
     <v-card outlined class="d-flex justify-center mb-12">
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="4">
         <v-card-title>Select Date Range</v-card-title>
         <v-card-text>
           <v-date-picker
@@ -71,7 +71,7 @@
     <v-row v-if="filteredCharts.length" class="justify-lg-start justify-space-around">
       <v-col
         cols="12"
-        xl="3"
+        lg="3"
         md="5"
         v-for="chart in filteredCharts"
         :key="chart.id"
