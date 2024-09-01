@@ -14,8 +14,10 @@ The project consists of two primary parts:
 - Nuxt
 - Vuetify
 - Vuex3
+- composition api
 - ApexChart
 - Axios
+- Typesript
 
 **To have the project work first need to install the  [Back end project](https://github.com/BakrAlqassab/Dashboard_project_BE) and then clone the project:**
 
