@@ -63,8 +63,8 @@ import { useAuth } from '~/composables/useAuth';
 
 export default defineComponent({
   setup() {
-    const email = ref('alqassab31@gmail.com');
-    const password = ref('password');
+    const email = ref('');
+    const password = ref('');
     const error = ref<string | null>(null);
     const valid = ref(false);
     const instance = getCurrentInstance();
