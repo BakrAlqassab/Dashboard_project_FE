@@ -71,7 +71,7 @@
     <v-row v-if="filteredCharts.length" class="justify-lg-start justify-space-around">
       <v-col
         cols="12"
-        lg="3"
+        lg="4"
         md="5"
         v-for="(chart, index) in filteredCharts"
         :key="chart.id"

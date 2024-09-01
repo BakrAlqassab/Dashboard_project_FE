@@ -136,21 +136,6 @@ export function useChartHelpers(store: any) {
       date: new Date().toISOString().split("T")[0],
     };
 
-    // store?.dispatch("charts/addChart", newChart).catch((error: any) => {
-    //   console.error("Failed to add chart:", error);
-    // });
-
-    // // Clear the cache after adding a new chart
-    // chartOptionsCache.value = {};
-    // await nextTick();
-    // const lastChartElement =
-    // lastChart.value && lastChart.value.length > 0
-    //   ? lastChart.value[lastChart.value.length - 1]
-    //   : null;
-
-    //     if (lastChartElement) {
-    //       (lastChartElement as HTMLElement).scrollIntoView({ behavior: "smooth" });
-    //     }
 
 
   try {
