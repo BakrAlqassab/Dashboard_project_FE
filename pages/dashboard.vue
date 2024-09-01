@@ -73,8 +73,9 @@
         cols="12"
         lg="3"
         md="5"
-        v-for="chart in filteredCharts"
+        v-for="(chart, index) in filteredCharts"
         :key="chart.id"
+          :ref="index === filteredCharts.length - 1 ? 'lastChart' : null"
       >
         <v-card outlined>
           <v-card-subtitle>Color: {{ chart.color }}</v-card-subtitle>
@@ -125,6 +126,7 @@ export default {
       selectedSensors,
       getChartOptions,
       addChart,
+      lastChart,
       sensors,
       selectedColor,
     } = useChartHelpers(store);
@@ -151,6 +153,7 @@ export default {
       sensorOptions,
       filteredCharts,
       addChart,
+      lastChart,
       getChartOptions,
       snackbar,
       snackbarMessage,

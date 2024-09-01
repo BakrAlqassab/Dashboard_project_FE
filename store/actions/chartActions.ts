@@ -65,6 +65,8 @@ import { RootState,ChartsState } from '../modules/state';
           'Authorization': `Bearer ${token}`
         }
       });
+      console.log("deleted")
+      console.log(id)
    
 
   

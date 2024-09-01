@@ -1,4 +1,4 @@
-import { ref, computed, onMounted, Ref } from "vue";
+import { ref, computed, onMounted, Ref, nextTick } from "vue";
 
 export function useChartHelpers(store: any) {
   const users = computed(() => store?.getters["auth/getUsers"] || []);
@@ -32,6 +32,7 @@ export function useChartHelpers(store: any) {
   const chartOptionsCache: Ref<{ [key: string]: any }> = ref({});
   const snackbar = ref(false);
   const snackbarMessage = ref("");
+  const lastChart = ref<HTMLElement[] | null>(null);
   const deleteChart = async (chartId: string) => {
     try {
       if (confirm("Do you really want to delete?")) {
@@ -39,6 +40,8 @@ export function useChartHelpers(store: any) {
           userId: selectedUser.value._id,
           id: chartId,
         });
+
+        store?.dispatch("charts/fetchCharts", selectedUser.value._id);
 
         snackbarMessage.value = "Chart removed.";
         snackbar.value = true;
@@ -62,23 +65,32 @@ export function useChartHelpers(store: any) {
         type: chart.type,
       },
       title: {
-        text: `Chart for ${chart.sensors
-          .map((sensor: any) => sensor.type)
-          .join(", ")}`,
-        align: "center",
-        style: {},
+        text:""
+//         text: `Chart for ${chart.sensors
+//           .map((sensor: any) => sensor.type)
+//           .join(", ")}`,
+//         align: "center",
+        
+//         style: {
+// width:"100%"
+
+        // },
       },
       colors: [chart.color],
       responsive: [
         {
-          breakpoint: 768, 
+          breakpoint: 768,
           options: {
-      
             title: {
               text: "",
             },
             legend: {
               fontSize: "8px",
+            },
+            dataLabels: {
+              style: {
+                fontSize: "10px", // Reduce font size for data labels
+              },
             },
           },
         },
@@ -97,7 +109,7 @@ export function useChartHelpers(store: any) {
     return chartOptions;
   };
 
-  const addChart = () => {
+  const addChart = async () => {
     // Check if a chart type is selected
     if (!selectedChartType.value) {
       snackbarMessage.value = "Please select a chart type!";
@@ -124,12 +136,44 @@ export function useChartHelpers(store: any) {
       date: new Date().toISOString().split("T")[0],
     };
 
-    store?.dispatch("charts/addChart", newChart).catch((error: any) => {
-      console.error("Failed to add chart:", error);
-    });
+    // store?.dispatch("charts/addChart", newChart).catch((error: any) => {
+    //   console.error("Failed to add chart:", error);
+    // });
+
+    // // Clear the cache after adding a new chart
+    // chartOptionsCache.value = {};
+    // await nextTick();
+    // const lastChartElement =
+    // lastChart.value && lastChart.value.length > 0
+    //   ? lastChart.value[lastChart.value.length - 1]
+    //   : null;
+
+    //     if (lastChartElement) {
+    //       (lastChartElement as HTMLElement).scrollIntoView({ behavior: "smooth" });
+    //     }
+
+
+  try {
+    await store?.dispatch("charts/addChart", newChart);
 
     // Clear the cache after adding a new chart
     chartOptionsCache.value = {};
+
+    // Wait for the DOM to update
+    await nextTick();
+
+    // Scroll to the last chart element
+    const lastChartElement =
+      lastChart.value && lastChart.value.length > 0
+        ? lastChart.value[lastChart.value.length - 1]
+        : null;
+
+    if (lastChartElement) {
+      (lastChartElement as HTMLElement).scrollIntoView({ behavior: "smooth" });
+    }
+  } catch (error: any) {
+    console.error("Failed to add chart:", error);
+  }
   };
 
   return {
@@ -140,7 +184,7 @@ export function useChartHelpers(store: any) {
     filteredCharts,
     selectUser,
     deleteChart,
-
+    lastChart,
     getChartOptions,
     addChart,
     selectedChartType,
